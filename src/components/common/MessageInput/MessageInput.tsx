@@ -4,7 +4,11 @@ import { Button } from '../button';
 import { Textarea } from '../Textarea';
 
 export interface MessageInputProps {
-  onSend: (content: string, type: 'text' | 'image' | 'video' | 'audio' | 'file', file?: File) => void;
+  onSend: (
+    content: string,
+    type: 'text' | 'image' | 'video' | 'audio' | 'file',
+    file?: File
+  ) => void;
   onTyping?: (isTyping: boolean) => void;
   placeholder?: string;
   disabled?: boolean;
@@ -62,8 +66,11 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const fileType = file.type.startsWith('image/') ? 'image' : 
-                      file.type.startsWith('video/') ? 'video' : 'file';
+      const fileType = file.type.startsWith('image/')
+        ? 'image'
+        : file.type.startsWith('video/')
+        ? 'video'
+        : 'file';
       onSend('', fileType, file);
     }
   };
@@ -81,9 +88,11 @@ export const MessageInput: React.FC<MessageInputProps> = ({
 
       mediaRecorder.onstop = () => {
         const blob = new Blob(chunks, { type: 'audio/wav' });
-        const file = new File([blob], 'voice-message.wav', { type: 'audio/wav' });
+        const file = new File([blob], 'voice-message.wav', {
+          type: 'audio/wav',
+        });
         onSend('', 'audio', file);
-        stream.getTracks().forEach(track => track.stop());
+        stream.getTracks().forEach((track) => track.stop());
       };
 
       mediaRecorder.start();
@@ -101,83 +110,88 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className={cn('border-t border-gray-200 p-4 bg-white shadow-sm', className)}>
-      <div className="flex items-end gap-2 max-w-4xl mx-auto">
-        {/* File upload button */}
-        <div className="flex gap-1 flex-shrink-0">
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*,video/*,.pdf,.doc,.docx"
-            onChange={handleFileSelect}
-            className="hidden"
-          />
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={disabled}
-            className="p-2"
-          >
-            📎
-          </Button>
+    <div className={cn('border-t border-gray-200 p-3 bg-white', className)}>
+      <div className="flex flex-col w-full max-w-4xl mx-auto">
+        {/* Main input area */}
+        <div className="flex items-center gap-2">
+          {/* File upload */}
+          <div className="flex-shrink-0">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,video/*,.pdf,.doc,.docx"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={disabled}
+              className="h-9 w-9 rounded-full hover:bg-gray-100"
+            >
+              📎
+            </Button>
+          </div>
+
+          {/* Message input */}
+          <div className="flex-1 relative">
+            <Textarea
+              value={message}
+              onChange={handleMessageChange}
+              onKeyDown={handleKeyPress}
+              placeholder={placeholder}
+              disabled={disabled}
+              maxLength={maxLength}
+              rows={1}
+              className="resize-none min-h-[40px] max-h-[120px] pr-[100px] py-2 px-4 rounded-full border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+
+            {/* Character count - Positioned absolutely */}
+            {message.length > maxLength * 0.8 && (
+              <div className="absolute right-3 bottom-2 text-xs text-gray-400">
+                {message.length}/{maxLength}
+              </div>
+            )}
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <Button
+              variant="ghost"
+              size="icon"
+              onMouseDown={startRecording}
+              onMouseUp={stopRecording}
+              onMouseLeave={stopRecording}
+              disabled={disabled}
+              className={cn(
+                'h-9 w-9 rounded-full',
+                isRecording
+                  ? 'bg-red-500 text-white hover:bg-red-600'
+                  : 'hover:bg-gray-100'
+              )}
+            >
+              🎤
+            </Button>
+
+            <Button
+              onClick={handleSend}
+              disabled={disabled || !message.trim()}
+              className="h-9 px-4 rounded-full bg-blue-500 hover:bg-blue-600 text-white disabled:bg-gray-200"
+            >
+              Gửi
+            </Button>
+          </div>
         </div>
 
-        {/* Message input */}
-        <div className="flex-1">
-          <Textarea
-            value={message}
-            onChange={handleMessageChange}
-            onKeyDown={handleKeyPress}
-            placeholder={placeholder}
-            disabled={disabled}
-            maxLength={maxLength}
-            rows={1}
-            className="resize-none min-h-[40px] max-h-[120px] border-gray-300 rounded-full px-4 py-2"
-          />
-        </div>
-
-        {/* Voice recording button */}
-        <Button
-          variant="ghost"
-          size="sm"
-          onMouseDown={startRecording}
-          onMouseUp={stopRecording}
-          onMouseLeave={stopRecording}
-          disabled={disabled}
-          className={cn(
-            'p-2 transition-colors flex-shrink-0',
-            isRecording ? 'bg-red-500 text-white' : ''
-          )}
-        >
-          🎤
-        </Button>
-
-        {/* Send button */}
-        <Button
-          onClick={handleSend}
-          disabled={disabled || !message.trim()}
-          size="sm"
-          className="rounded-full px-4 flex-shrink-0"
-        >
-          Gửi
-        </Button>
+        {/* Recording indicator */}
+        {isRecording && (
+          <div className="flex items-center justify-center mt-2 text-red-500 text-sm font-medium">
+            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse mr-2"></div>
+            Đang ghi âm... (thả chuột để dừng)
+          </div>
+        )}
       </div>
-
-      {/* Recording indicator */}
-      {isRecording && (
-        <div className="flex items-center justify-center mt-2 text-red-500 text-sm">
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse mr-2"></div>
-          Đang ghi âm... (thả chuột để dừng)
-        </div>
-      )}
-
-      {/* Character count */}
-      {message.length > maxLength * 0.8 && (
-        <div className="text-right text-xs text-gray-400 mt-1">
-          {message.length}/{maxLength}
-        </div>
-      )}
     </div>
   );
 };

@@ -50,7 +50,7 @@ export default function Loading() {
               <div className="w-full h-96 bg-gray-200 animate-pulse"></div>
 
               {/* Post Actions */}
-                                                <div className="p-4 space-y-3">
+              <div className="p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex space-x-4">
                     <div className="w-6 h-6 bg-gray-200 rounded animate-pulse"></div>
@@ -59,7 +59,7 @@ export default function Loading() {
                   </div>
                   <div className="w-6 h-6 bg-gray-200 rounded animate-pulse"></div>
                 </div>
-                
+
                 <div className="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
                 <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
                 <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>

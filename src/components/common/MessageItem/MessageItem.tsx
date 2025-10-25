@@ -31,9 +31,9 @@ export const MessageItem: React.FC<MessageItemProps> = ({
   const isOwn = message.senderId === currentUserId;
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('vi-VN', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    return date.toLocaleTimeString('vi-VN', {
+      hour: '2-digit',
+      minute: '2-digit',
     });
   };
 
@@ -46,11 +46,13 @@ export const MessageItem: React.FC<MessageItemProps> = ({
               src={message.mediaUrl}
               alt="Shared image"
               className="max-w-xs rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => {/* TODO: Open image modal */}}
+              onClick={() => {
+                /* TODO: Open image modal */
+              }}
             />
           </div>
         );
-      
+
       case 'video':
         return (
           <div className="relative max-w-xs">
@@ -61,7 +63,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
             />
           </div>
         );
-      
+
       case 'audio':
         return (
           <div className="flex items-center bg-gray-100 rounded-full px-3 py-2 max-w-xs">
@@ -74,7 +76,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
             <span className="text-xs text-gray-500 ml-2">0:30</span>
           </div>
         );
-      
+
       case 'file':
         return (
           <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 max-w-xs cursor-pointer hover:bg-gray-200 transition-colors">
@@ -87,15 +89,17 @@ export const MessageItem: React.FC<MessageItemProps> = ({
             </div>
           </div>
         );
-      
+
       default:
         return (
-          <div className={cn(
-            'px-4 py-2 rounded-2xl max-w-xs lg:max-w-md break-words',
-            isOwn 
-              ? 'bg-blue-500 text-white' 
-              : 'bg-white text-gray-900 border border-gray-200'
-          )}>
+          <div
+            className={cn(
+              'px-4 py-2 rounded-2xl max-w-xs lg:max-w-md break-words',
+              isOwn
+                ? 'bg-blue-500 text-white'
+                : 'bg-white text-gray-900 border border-gray-200'
+            )}
+          >
             {message.content}
           </div>
         );
@@ -104,7 +108,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
 
   const renderMessageStatus = () => {
     if (!isOwn) return null;
-    
+
     return (
       <div className="flex items-center text-xs text-gray-400 mt-1">
         {message.isRead ? (
@@ -134,7 +138,10 @@ export const MessageItem: React.FC<MessageItemProps> = ({
           src={sender.avatarUrl}
           alt={sender.fullName || sender.username}
           size="sm"
-          fallback={sender.fullName?.charAt(0).toUpperCase() || sender.username.charAt(0).toUpperCase()}
+          fallback={
+            sender.fullName?.charAt(0).toUpperCase() ||
+            sender.username.charAt(0).toUpperCase()
+          }
         />
       )}
 
@@ -149,13 +156,15 @@ export const MessageItem: React.FC<MessageItemProps> = ({
         {/* Nội dung tin nhắn */}
         <div className="relative">
           {renderMessageContent()}
-          
+
           {/* Message options */}
           {showOptions && (
-            <div className={cn(
-              'absolute top-0 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity',
-              isOwn ? '-left-20' : '-right-20'
-            )}>
+            <div
+              className={cn(
+                'absolute top-0 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity',
+                isOwn ? '-left-20' : '-right-20'
+              )}
+            >
               <button
                 onClick={() => onReply?.(message.id)}
                 className="w-6 h-6 bg-gray-600 text-white rounded-full flex items-center justify-center text-xs hover:bg-gray-700"
