@@ -25,9 +25,7 @@ export function useDebounce<T extends (...args: any[]) => any>(
   return debouncedCallback;
 }
 
-/**
- * Hook to throttle a function call
- */
+
 export function useThrottle<T extends (...args: any[]) => any>(
   callback: T,
   delay: number

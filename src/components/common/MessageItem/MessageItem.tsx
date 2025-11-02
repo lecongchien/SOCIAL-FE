@@ -97,7 +97,7 @@ export const MessageItem: React.FC<MessageItemProps> = ({
               'px-4 py-2 rounded-2xl max-w-xs lg:max-w-md break-words',
               isOwn
                 ? 'bg-blue-500 text-white'
-                : 'bg-white text-gray-900 border border-gray-200'
+                : 'bg-white  text-gray-900 border border-gray-200'
             )}
           >
             {message.content}

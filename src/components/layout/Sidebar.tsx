@@ -1,5 +1,6 @@
 'use client';
 
+import { useDarkMode } from '@/hooks/useDarkMode';
 import * as Popover from '@radix-ui/react-popover';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -81,6 +82,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
   const pathname = usePathname();
+  const { toggleDark } = useDarkMode();
 
   return (
     <div
@@ -113,7 +115,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className={`flex items-center px-3 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group ${
+                    className={`flex items-center px-3 py-3 text-gray-700  rounded-lg  hover:bg-gray-100 transition-colors group ${
                       isActive ? 'bg-gray-100 font-semibold' : ''
                     }`}
                   >
@@ -148,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
           >
             <Avatar src="" alt="Profile" size="sm" className="w-6 h-6" />
             {!isCollapsed && (
-              <span className="ml-3 text-base text-gray-700 group-hover:text-black">
+              <span className="ml-3 text-base text-gray-700group-hover:text-black">
                 Trang cá nhân
               </span>
             )}
@@ -171,7 +173,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
             <Popover.Content
               side="top"
               align="center"
-              className="bg-white rounded-xl shadow-lg p-2 w-64"
+              className="bg-white  rounded-xl shadow-lg p-2 w-64"
             >
               <div className="flex flex-col gap-1">
                 <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
@@ -186,7 +188,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
                   <span>🔖</span>
                   <span>Đã lưu</span>
                 </button>
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
+                <button
+                  className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors"
+                  onClick={toggleDark}
+                >
                   <span>🌙</span>
                   <span>Chuyển chế độ</span>
                 </button>

@@ -110,7 +110,7 @@ export const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className={cn('border-t border-gray-200 p-3 bg-white', className)}>
+    <div className={cn('border-t border-gray-200 p-3 bg-white ', className)}>
       <div className="flex flex-col w-full max-w-4xl mx-auto">
         {/* Main input area */}
         <div className="flex items-center gap-2">

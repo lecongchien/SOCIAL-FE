@@ -12,7 +12,11 @@ export interface ChatWindowProps {
   currentUser: User;
   messages: Message[];
   participants: User[];
-  onSendMessage: (content: string, type: 'text' | 'image' | 'video' | 'audio' | 'file', file?: File) => void;
+  onSendMessage: (
+    content: string,
+    type: 'text' | 'image' | 'video' | 'audio' | 'file',
+    file?: File
+  ) => void;
   onBack?: () => void;
   className?: string;
 }
@@ -36,7 +40,12 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
 
   if (!conversation) {
     return (
-      <div className={cn('flex-1 flex items-center justify-center bg-gray-50', className)}>
+      <div
+        className={cn(
+          'flex-1 flex items-center justify-center bg-gray-50',
+          className
+        )}
+      >
         <div className="text-center">
           <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
             💬
@@ -52,7 +61,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     );
   }
 
-  const otherParticipant = participants.find(p => p.id !== currentUser.id);
+  const otherParticipant = participants.find((p) => p.id !== currentUser.id);
 
   const handleTyping = (isTyping: boolean) => {
     // TODO: Implement typing indicator logic
@@ -61,8 +70,8 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
 
   const groupMessagesByDate = (messages: Message[]) => {
     const groups: { [key: string]: Message[] } = {};
-    
-    messages.forEach(message => {
+
+    messages.forEach((message) => {
       const dateKey = message.createdAt.toDateString();
       if (!groups[dateKey]) {
         groups[dateKey] = [];
@@ -72,7 +81,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
 
     return Object.entries(groups).map(([date, msgs]) => ({
       date: new Date(date),
-      messages: msgs
+      messages: msgs,
     }));
   };
 
@@ -86,11 +95,11 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     } else if (date.toDateString() === yesterday.toDateString()) {
       return 'Hôm qua';
     } else {
-      return date.toLocaleDateString('vi-VN', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
+      return date.toLocaleDateString('vi-VN', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
       });
     }
   };
@@ -98,9 +107,14 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
   const messageGroups = groupMessagesByDate(messages);
 
   return (
-    <div className={cn('flex flex-col h-full bg-white overflow-hidden', className)}>
+    <div
+      className={cn(
+        'flex flex-col h-full bg-white  overflow-hidden',
+        className
+      )}
+    >
       {/* Header */}
-      <div className="flex items-center p-4 border-b border-gray-200 bg-white flex-shrink-0 z-10">
+      <div className="flex items-center p-4 border-b border-gray-200 bg-white  flex-shrink-0 z-10">
         {/* Back button cho mobile */}
         {onBack && (
           <Button
@@ -116,26 +130,36 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         {/* Avatar và thông tin */}
         <div className="flex items-center flex-1 min-w-0">
           <Avatar
-            src={conversation.isGroup ? conversation.groupAvatar : otherParticipant?.avatarUrl}
-            alt={conversation.isGroup ? conversation.groupName : otherParticipant?.fullName || otherParticipant?.username}
+            src={
+              conversation.isGroup
+                ? conversation.groupAvatar
+                : otherParticipant?.avatarUrl
+            }
+            alt={
+              conversation.isGroup
+                ? conversation.groupName
+                : otherParticipant?.fullName || otherParticipant?.username
+            }
             size="md"
-            fallback={conversation.isGroup ? 
-              conversation.groupName?.charAt(0).toUpperCase() : 
-              otherParticipant?.fullName?.charAt(0).toUpperCase() || otherParticipant?.username?.charAt(0).toUpperCase()
+            fallback={
+              conversation.isGroup
+                ? conversation.groupName?.charAt(0).toUpperCase()
+                : otherParticipant?.fullName?.charAt(0).toUpperCase() ||
+                  otherParticipant?.username?.charAt(0).toUpperCase()
             }
           />
           <div className="ml-3">
             <h3 className="font-medium text-gray-900">
-              {conversation.isGroup ? 
-                conversation.groupName : 
-                otherParticipant?.fullName || otherParticipant?.username || 'Unknown User'
-              }
+              {conversation.isGroup
+                ? conversation.groupName
+                : otherParticipant?.fullName ||
+                  otherParticipant?.username ||
+                  'Unknown User'}
             </h3>
             <p className="text-sm text-gray-500">
-              {conversation.isGroup ? 
-                `${participants.length} thành viên` :
-                'Đang hoạt động'
-              }
+              {conversation.isGroup
+                ? `${participants.length} thành viên`
+                : 'Đang hoạt động'}
             </p>
           </div>
         </div>
@@ -168,44 +192,52 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
 
               {/* Messages for this date */}
               {dayMessages.map((message, index) => {
-                const sender = participants.find(p => p.id === message.senderId) || currentUser;
-              const showAvatar = conversation.isGroup && 
-                message.senderId !== currentUser.id &&
-                (index === dayMessages.length - 1 || 
-                 dayMessages[index + 1]?.senderId !== message.senderId);
+                const sender =
+                  participants.find((p) => p.id === message.senderId) ||
+                  currentUser;
+                const showAvatar =
+                  conversation.isGroup &&
+                  message.senderId !== currentUser.id &&
+                  (index === dayMessages.length - 1 ||
+                    dayMessages[index + 1]?.senderId !== message.senderId);
 
-              return (
-                <MessageItem
-                  key={message.id}
-                  message={message}
-                  sender={sender}
-                  currentUserId={currentUser.id}
-                  isGroupChat={conversation.isGroup}
-                  showAvatar={showAvatar}
-                />
-              );
-            })}
-          </div>
-        ))}
-
-        {/* Typing indicator */}
-        {typingUsers.length > 0 && (
-          <div className="flex items-center gap-2 text-gray-500 text-sm">
-            <div className="flex space-x-1">
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                return (
+                  <MessageItem
+                    key={message.id}
+                    message={message}
+                    sender={sender}
+                    currentUserId={currentUser.id}
+                    isGroupChat={conversation.isGroup}
+                    showAvatar={showAvatar}
+                  />
+                );
+              })}
             </div>
-            <span>
-              {typingUsers.length === 1 ? 
-                `${typingUsers[0]} đang nhập...` :
-                `${typingUsers.length} người đang nhập...`
-              }
-            </span>
-          </div>
-        )}
+          ))}
 
-        <div ref={messagesEndRef} />
+          {/* Typing indicator */}
+          {typingUsers.length > 0 && (
+            <div className="flex items-center gap-2 text-gray-500 text-sm">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '0.1s' }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: '0.2s' }}
+                ></div>
+              </div>
+              <span>
+                {typingUsers.length === 1
+                  ? `${typingUsers[0]} đang nhập...`
+                  : `${typingUsers.length} người đang nhập...`}
+              </span>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
         </div>
       </div>
 
@@ -214,7 +246,11 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         <MessageInput
           onSend={onSendMessage}
           onTyping={handleTyping}
-          placeholder={`Nhắn tin với ${conversation.isGroup ? conversation.groupName : otherParticipant?.username || 'người này'}...`}
+          placeholder={`Nhắn tin với ${
+            conversation.isGroup
+              ? conversation.groupName
+              : otherParticipant?.username || 'người này'
+          }...`}
         />
       </div>
     </div>
