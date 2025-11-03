@@ -1,6 +1,11 @@
-"use client";
+'use client';
 
-import { Button, ChatWindow, ConversationItem, Input } from '@/components/common';
+import {
+  Button,
+  ChatWindow,
+  ConversationItem,
+  Input,
+} from '@/components/common';
 import { useEffect, useState } from 'react';
 import { Conversation, Message } from '../../../../types/message';
 import { User } from '../../../../types/user';
@@ -11,7 +16,8 @@ const mockCurrentUser: User = {
   username: 'chisaln',
   email: 'chisaln@example.com',
   fullName: 'Chí Saln',
-  avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+  avatarUrl:
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
   role: 'user',
   createdAt: new Date(),
   isActive: true,
@@ -23,7 +29,8 @@ const mockUsers: User[] = [
     username: 'phuongthao',
     email: 'phuongthao@example.com',
     fullName: 'Phương Thảo',
-    avatarUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    avatarUrl:
+      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
     role: 'user',
     createdAt: new Date(),
     isActive: true,
@@ -33,7 +40,8 @@ const mockUsers: User[] = [
     username: 'laiquynh',
     email: 'laiquynh@example.com',
     fullName: 'Lai Quỳnh Hương',
-    avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    avatarUrl:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
     role: 'user',
     createdAt: new Date(),
     isActive: true,
@@ -43,7 +51,8 @@ const mockUsers: User[] = [
     username: 'mkhanh',
     email: 'mkhanh@example.com',
     fullName: 'M Khánh',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    avatarUrl:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
     role: 'user',
     createdAt: new Date(),
     isActive: true,
@@ -184,8 +193,10 @@ const mockMessages: { [key: string]: Message[] } = {
 };
 
 export default function MessagesPage() {
-  const [selectedConversation, setSelectedConversation] = useState<Conversation | null>(null);
-  const [conversations, setConversations] = useState<Conversation[]>(mockConversations);
+  const [selectedConversation, setSelectedConversation] =
+    useState<Conversation | null>(null);
+  const [conversations, setConversations] =
+    useState<Conversation[]>(mockConversations);
   const [messages, setMessages] = useState<Message[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobile, setIsMobile] = useState(false);
@@ -196,7 +207,7 @@ export default function MessagesPage() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -212,17 +223,24 @@ export default function MessagesPage() {
   }, [selectedConversation]);
 
   const handleConversationSelect = (conversationId: string) => {
-    const conversation = conversations.find(c => c.id === conversationId);
+    const conversation = conversations.find((c) => c.id === conversationId);
     setSelectedConversation(conversation || null);
   };
 
-  const handleSendMessage = (content: string, type: 'text' | 'image' | 'video' | 'audio' | 'file', file?: File) => {
+  const handleSendMessage = (
+    content: string,
+    type: 'text' | 'image' | 'video' | 'audio' | 'file',
+    file?: File
+  ) => {
     if (!selectedConversation) return;
 
     const newMessage: Message = {
       id: `msg-${Date.now()}`,
       senderId: mockCurrentUser.id,
-      receiverId: selectedConversation.participants.find(p => p !== mockCurrentUser.id) || '',
+      receiverId:
+        selectedConversation.participants.find(
+          (p) => p !== mockCurrentUser.id
+        ) || '',
       conversationId: selectedConversation.id,
       content,
       type,
@@ -232,11 +250,11 @@ export default function MessagesPage() {
       isDelivered: true,
     };
 
-    setMessages(prev => [...prev, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
 
     // Update conversation's last message
-    setConversations(prev => 
-      prev.map(conv => 
+    setConversations((prev) =>
+      prev.map((conv) =>
         conv.id === selectedConversation.id
           ? { ...conv, lastMessage: newMessage, lastMessageAt: new Date() }
           : conv
@@ -249,39 +267,52 @@ export default function MessagesPage() {
     setSelectedConversation(null);
   };
 
-  const filteredConversations = conversations.filter(conv => {
+  const filteredConversations = conversations.filter((conv) => {
     if (!searchQuery) return true;
-    
-    const otherParticipant = mockUsers.find(user => 
-      conv.participants.includes(user.id) && user.id !== mockCurrentUser.id
+
+    const otherParticipant = mockUsers.find(
+      (user) =>
+        conv.participants.includes(user.id) && user.id !== mockCurrentUser.id
     );
-    
-    return otherParticipant?.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           otherParticipant?.username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           conv.groupName?.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return (
+      otherParticipant?.fullName
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      otherParticipant?.username
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      conv.groupName?.toLowerCase().includes(searchQuery.toLowerCase())
+    );
   });
 
   const getParticipants = (conversation: Conversation) => {
-    return conversation.participants.map(id => 
-      id === mockCurrentUser.id ? mockCurrentUser : mockUsers.find(u => u.id === id)
-    ).filter(Boolean) as User[];
+    return conversation.participants
+      .map((id) =>
+        id === mockCurrentUser.id
+          ? mockCurrentUser
+          : mockUsers.find((u) => u.id === id)
+      )
+      .filter(Boolean) as User[];
   };
 
   return (
-    <div className="h-full flex bg-white overflow-hidden">
+    <div className="h-full flex bg-white  overflow-hidden">
       {/* Sidebar - Conversations List */}
-      <div className={`w-full md:w-96 md:min-w-[384px] border-r border-gray-200 flex flex-col ${
-        isMobile && showChatWindow ? 'hidden' : 'flex'
-      }`}>
+      <div
+        className={`w-full md:w-96 md:min-w-[384px] border-r border-gray-200 flex flex-col ${
+          isMobile && showChatWindow ? 'hidden' : 'flex'
+        }`}
+      >
         {/* Header */}
-        <div className="p-4 border-b border-gray-200 flex-shrink-0 bg-white">
+        <div className="p-4 border-b border-gray-200 flex-shrink-0 bg-white ">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-xl font-semibold">Tin nhắn</h1>
             <Button variant="ghost" size="sm">
               ✏️
             </Button>
           </div>
-          
+
           {/* Search */}
           <Input
             type="text"
@@ -315,14 +346,18 @@ export default function MessagesPage() {
       </div>
 
       {/* Chat Window */}
-      <div className={`flex-1 min-w-0 flex ${
-        isMobile && !showChatWindow ? 'hidden' : ''
-      }`}>
+      <div
+        className={`flex-1 min-w-0 flex ${
+          isMobile && !showChatWindow ? 'hidden' : ''
+        }`}
+      >
         <ChatWindow
           conversation={selectedConversation}
           currentUser={mockCurrentUser}
           messages={messages}
-          participants={selectedConversation ? getParticipants(selectedConversation) : []}
+          participants={
+            selectedConversation ? getParticipants(selectedConversation) : []
+          }
           onSendMessage={handleSendMessage}
           onBack={isMobile ? handleBack : undefined}
           className="w-full"

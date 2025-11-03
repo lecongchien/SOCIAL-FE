@@ -19,7 +19,7 @@ export default function MessagesLayout({
       <div
         className={`flex-1 transition-all duration-200 ${
           isSidebarCollapsed ? 'ml-16' : 'ml-64'
-        } bg-white overflow-hidden`}
+        } bg-white  overflow-hidden`}
       >
         {children}
       </div>

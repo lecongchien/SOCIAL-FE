@@ -10,6 +10,7 @@ import {
   MoreHorizontal,
   Share,
 } from 'lucide-react';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { Avatar } from '../Avatar';
 
@@ -94,7 +95,7 @@ export const Post: React.FC<PostProps> = ({
         <div
           className={cn(
             'mt-3 rounded-2xl overflow-hidden',
-            images.length === 1 && 'max-h-96',
+            images.length === 1 && 'flex justify-center items-center',
             images.length === 2 && 'grid grid-cols-2 gap-1',
             images.length === 3 && 'grid grid-cols-2 gap-1',
             images.length >= 4 && 'grid grid-cols-2 gap-1'
@@ -109,10 +110,17 @@ export const Post: React.FC<PostProps> = ({
                 images.length >= 4 && index >= 2 && 'aspect-square'
               )}
             >
-              <img
+              <Image
                 src={image}
                 alt={`Post image ${index + 1}`}
-                className="w-full h-full object-cover"
+                className={cn(
+                  'w-full h-full',
+                  images.length === 1
+                    ? 'object-contain max-h-[60vh]'
+                    : 'object-cover'
+                )}
+                width={500}
+                height={500}
               />
               {images.length > 4 && index === 3 && (
                 <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
@@ -133,7 +141,7 @@ export const Post: React.FC<PostProps> = ({
   return (
     <article
       className={cn(
-        'bg-white border border-gray-200 rounded-2xl p-4 hover:bg-gray-50/50 transition-colors',
+        'bg-white  border border-gray-200 rounded-2xl p-4 hover:bg-gray-50/50 transition-colors',
         className
       )}
     >

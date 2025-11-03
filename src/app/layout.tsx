@@ -1,29 +1,35 @@
+import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from '@/components/theme-provider';
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
   display: 'swap',
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
   title: {
     default: 'Social App - Connect with Friends',
-    template: '%s | Social App'
+    template: '%s | Social App',
   },
-  description: "A modern social media platform to connect with friends and share moments.",
-  keywords: ['social media', 'instagram clone', 'photo sharing', 'social network'],
+  description:
+    'A modern social media platform to connect with friends and share moments.',
+  keywords: [
+    'social media',
+    'instagram clone',
+    'photo sharing',
+    'social network',
+  ],
   authors: [{ name: 'Social App Team' }],
   creator: 'Social App',
   publisher: 'Social App',
@@ -33,7 +39,8 @@ export const metadata: Metadata = {
     url: 'https://your-domain.com',
     siteName: 'Social App',
     title: 'Social App - Connect with Friends',
-    description: 'A modern social media platform to connect with friends and share moments.',
+    description:
+      'A modern social media platform to connect with friends and share moments.',
     images: [
       {
         url: '/og-image.jpg',
@@ -46,7 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Social App - Connect with Friends',
-    description: 'A modern social media platform to connect with friends and share moments.',
+    description:
+      'A modern social media platform to connect with friends and share moments.',
     creator: '@socialapp',
     images: ['/og-image.jpg'],
   },
@@ -84,10 +92,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jura:wght@300..700&family=Roboto+Slab:wght@100..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
           <Analytics />
           <SpeedInsights />
