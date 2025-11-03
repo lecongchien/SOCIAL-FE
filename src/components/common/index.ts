@@ -30,3 +30,20 @@ export type { PostProps } from './Post';
 export type { TextareaProps } from './Textarea';
 export type { UserCardProps } from './UserCard';
 
+// Export all components
+export * from './Avatar';
+export * from './button';
+export * from './ChatWindow';
+export * from './Comment';
+export * from './ConversationItem';
+export * from './CreatePost';
+export * from './icons';
+export * from './Input';
+export * from './Loading';
+export * from './MessageInput';
+export * from './MessageItem';
+export * from './Modal';
+export { MoreMenu } from './MoreMenu/MoreMenu';
+export * from './Post';
+export * from './Textarea';
+export * from './UserCard';

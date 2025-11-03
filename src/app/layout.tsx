@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import TopNav from '../components/layout/TopNav';
 import './globals.css';
 
 const geistSans = Geist({
@@ -104,6 +105,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
+      <TopNav />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

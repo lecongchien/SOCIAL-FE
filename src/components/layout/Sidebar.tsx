@@ -1,16 +1,15 @@
 'use client';
 
 import { useDarkMode } from '@/hooks/useDarkMode';
-import * as Popover from '@radix-ui/react-popover';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { MoreMenu } from '../common';
 import { Avatar } from '../common/Avatar';
 import {
   CreateIcon,
   ExploreIcon,
   HomeIcon,
-  MenuIcon,
   MessagesIcon,
   NotificationsIcon,
   ProfileIcon,
@@ -86,7 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
 
   return (
     <div
-      className={`fixed left-0 top-0 h-full bg-white border-r border-gray-200 transition-all duration-200 z-40 ${
+      className={`fixed left-0 top-0 h-full md:block hidden bg-white border-r border-gray-200 transition-all duration-200 z-40 ${
         isCollapsed ? 'w-16' : 'w-64'
       }`}
     >
@@ -159,58 +158,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
 
         {/* More Menu */}
         <div className="p-3">
-          <Popover.Root>
-            <Popover.Trigger asChild>
-              <button className="flex cursor-pointer items-center w-full px-3 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group">
-                <MenuIcon className="w-6 h-6 text-gray-700 group-hover:text-black" />
-                {!isCollapsed && (
-                  <span className="ml-3 text-base text-gray-700 group-hover:text-black">
-                    Xem thêm
-                  </span>
-                )}
-              </button>
-            </Popover.Trigger>
-            <Popover.Content
-              side="top"
-              align="center"
-              className="bg-white  rounded-xl shadow-lg p-2 w-64"
-            >
-              <div className="flex flex-col gap-1">
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
-                  <span>⚙️</span>
-                  <span>Cài đặt</span>
-                </button>
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
-                  <span>📊</span>
-                  <span>Hoạt động của bạn</span>
-                </button>
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
-                  <span>🔖</span>
-                  <span>Đã lưu</span>
-                </button>
-                <button
-                  className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors"
-                  onClick={toggleDark}
-                >
-                  <span>🌙</span>
-                  <span>Chuyển chế độ</span>
-                </button>
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
-                  <span>💬</span>
-                  <span>Báo cáo sự cố</span>
-                </button>
-                <hr className="my-2" />
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-black transition-colors">
-                  <span>🔄</span>
-                  <span>Chuyển tài khoản</span>
-                </button>
-                <button className="flex cursor-pointer text-gray-700 items-center gap-2 px-4 py-2 rounded hover:bg-gray-100 hover:text-red-500 transition-colors">
-                  <span>🚪</span>
-                  <span>Đăng xuất</span>
-                </button>
-              </div>
-            </Popover.Content>
-          </Popover.Root>
+          <MoreMenu isCollapsed={isCollapsed} />
         </div>
       </div>
     </div>
