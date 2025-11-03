@@ -14,37 +14,43 @@ const stories: Story[] = [
   {
     id: '1',
     username: '_miniboo...',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/72/33/4d/72334d0f7b53aa6023b519a970691fea.jpg',
     isViewed: false,
   },
   {
     id: '2',
     username: 'taylorswift',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/76/e1/e8/76e1e8bcf9086cd27b07c48c86dc2dbb.jpg',
     isViewed: false,
   },
   {
     id: '3',
     username: 'pinkyswa...',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/89/ec/36/89ec3697fa15da82473abf0b9791050f.jpg',
     isViewed: true,
   },
   {
     id: '4',
     username: 'ima.jewelry',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/38/59/6d/38596db1a2ef0a933f743e227aceb5d6.jpg',
     isViewed: false,
   },
   {
     id: '5',
     username: 'lilkey01',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/c3/d1/70/c3d1701c5ebf6b81347c478fb4b91e07.jpg',
     isViewed: true,
   },
   {
     id: '6',
     username: 'dpran',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/1200x/8c/54/a5/8c54a5f558558be5f3e2b625dac02f5a.jpg',
     isViewed: false,
   },
 ];

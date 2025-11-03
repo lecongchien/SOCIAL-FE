@@ -5,17 +5,17 @@ module.exports = {
       2,
       'always',
       [
-        'feat',      // Tính năng mới
-        'fix',       // Sửa lỗi
-        'docs',      // Tài liệu
-        'style',     // Format, thiếu dấu chấm phẩy, v.v.; không có thay đổi code
-        'refactor',  // Refactor code
-              'perf',      // Cải thiện hiệu suất
-        'test',      // Thêm test
-        'chore',     // Các thay đổi build process hoặc auxiliary tools
-         'ci',        // CI related changes
-        'build',     // Build system changes
-        'revert',    // Revert to a commit
+        'feat', // Tính năng mới
+        'fix', // Sửa lỗi
+        'docs', // Tài liệu
+        'style', // Format, thiếu dấu chấm phẩy, v.v.; không có thay đổi code
+        'refactor', // Refactor code
+        'perf', // Cải thiện hiệu suất
+        'test', // Thêm test
+        'chore', // Các thay đổi build process hoặc auxiliary tools
+        'ci', // CI related changes
+        'build', // Build system changes
+        'revert', // Revert to a commit
       ],
     ],
     'type-case': [2, 'always', 'lower-case'],

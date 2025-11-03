@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React from 'react';
-import { ProfileIcon, SearchIcon } from '../common/icons';
+import { SearchIcon } from '../common/icons';
 
 const HeartIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
@@ -53,42 +53,13 @@ export const TopNav: React.FC = () => {
               />
             </label>
           </div>
-
-          {/* Right: Icons */}
           <div className="flex items-center gap-4">
-            <button
-              aria-label="Create"
-              className="p-1 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-800"
-            >
-              <svg
-                className="w-6 h-6 text-gray-700 dark:text-zinc-300"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-
             <button
               aria-label="Likes"
               className="p-1 rounded-md hover:bg-gray-100 dark:hover:bg-zinc-800"
             >
               <HeartIcon className="w-6 h-6 text-gray-700 dark:text-zinc-300" />
             </button>
-
-            <Link
-              href="/user"
-              aria-label="Profile"
-              className="p-1 rounded-full hover:ring-1 hover:ring-black/10"
-            >
-              <ProfileIcon className="w-7 h-7 text-gray-700 dark:text-zinc-300" />
-            </Link>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export default function ProtectedLayout({
           isSidebarCollapsed ? 'ml-16' : 'sm:ml-20 md:ml-64'
         } lg:mr-80 xl:mr-96 min-h-screen`}
       >
-        <main className="max-w-2xl mx-auto py-8 px-4">{children}</main>
+        <main className="max-w-2xl mx-auto sm:py-8 py-16 px-4">{children}</main>
       </div>
       {/* Suggestions Panel - Hidden on smaller screens */}
       <div className="hidden lg:block">

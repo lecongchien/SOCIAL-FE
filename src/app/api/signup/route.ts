@@ -1,5 +1,5 @@
 // File: src/app/api/signup/route.ts
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, email });
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: "Invalid request" },
+      { success: false, error: 'Invalid request' },
       { status: 400 }
     );
   }

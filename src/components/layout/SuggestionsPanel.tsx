@@ -15,35 +15,40 @@ const suggestedUsers: SuggestedUser[] = [
     id: '1',
     username: 'fumiyan_1122',
     name: 'Đang theo dõi minoha_m',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/c3/d1/70/c3d1701c5ebf6b81347c478fb4b91e07.jpg',
     isFollowing: false,
   },
   {
     id: '2',
     username: 'ihn.732',
     name: 'Có nhiềm theo dõi',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/38/59/6d/38596db1a2ef0a933f743e227aceb5d6.jpg',
     isFollowing: false,
   },
   {
     id: '3',
     username: 'dungpearrr.x.x',
     name: 'Gợi ý cho bạn',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/1200x/8c/54/a5/8c54a5f558558be5f3e2b625dac02f5a.jpg',
     isFollowing: false,
   },
   {
     id: '4',
     username: 'hynrose',
     name: 'Có _miniboo512 theo dõi',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/89/ec/36/89ec3697fa15da82473abf0b9791050f.jpg',
     isFollowing: false,
   },
   {
     id: '5',
     username: 'pmkhoa_z',
     name: 'Gợi ý cho bạn',
-    avatar: '',
+    avatar:
+      'https://i.pinimg.com/736x/76/e1/e8/76e1e8bcf9086cd27b07c48c86dc2dbb.jpg',
     isFollowing: false,
   },
 ];
@@ -51,7 +56,8 @@ const suggestedUsers: SuggestedUser[] = [
 const currentUser = {
   username: 'chisaln',
   name: 'chisaln',
-  avatar: '',
+  avatar:
+    'https://i.pinimg.com/736x/72/33/4d/72334d0f7b53aa6023b519a970691fea.jpg',
 };
 
 export const SuggestionsPanel: React.FC = () => {

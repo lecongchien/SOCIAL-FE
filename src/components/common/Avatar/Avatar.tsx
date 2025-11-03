@@ -55,7 +55,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   return (
-    <div className="relative inline-flex">
+    <div className="relative ">
       <ShadcnAvatar
         className={cn(
           sizeMap[size],
