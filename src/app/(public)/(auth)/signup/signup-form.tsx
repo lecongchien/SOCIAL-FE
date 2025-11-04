@@ -62,11 +62,9 @@ export function SignupForm() {
   return (
     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
       <div className="flex flex-col space-y-2 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Create an account
-        </h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Tạo tài khoản</h1>
         <p className="text-sm text-muted-foreground">
-          Enter your details to create your account
+          Nhập thông tin của bạn để tạo tài khoản
         </p>
       </div>
       <Form {...form}>
@@ -76,9 +74,9 @@ export function SignupForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Họ và tên</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="Nguyễn Văn A" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,7 +90,7 @@ export function SignupForm() {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="example@example.com"
+                    placeholder="ví dụ@example.com"
                     type="email"
                     {...field}
                   />
@@ -106,7 +104,7 @@ export function SignupForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Mật khẩu</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -119,7 +117,7 @@ export function SignupForm() {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
+                <FormLabel>Xác nhận mật khẩu</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} />
                 </FormControl>
@@ -137,9 +135,9 @@ export function SignupForm() {
         </form>
       </Form>
       <div className="text-center text-sm">
-        Already have an account?{' '}
+        Bạn đã có tài khoản?{' '}
         <Link href="/login" className="text-primary hover:underline">
-          Sign in
+          Đăng nhập
         </Link>
       </div>
     </div>

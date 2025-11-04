@@ -23,10 +23,9 @@ export default function SignupPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              &ldquo;Join our community and start sharing your moments with the
-              world.&rdquo;
+              &ldquo; Kết nối, chia sẻ và khám phá những khoảnh khắc đáng nhớ
+              cùng cộng đồng của bạn.&rdquo;
             </p>
-            <footer className="text-sm">John Smith</footer>
           </blockquote>
         </div>
       </div>
