@@ -10,36 +10,53 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { useRegisterMutation } from '@/queries/useAuth';
+import {
+  RegisterBody,
+  RegisterBodyType,
+} from '@/schemaValidations/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
-const formSchema = z
-  .object({
-    name: z.string().min(2, 'Name must be at least 2 characters'),
-    email: z.string().email('Invalid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ['confirmPassword'],
-  });
 
 export function SignupForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const router = useRouter();
+  const { toast } = useToast();
+  const registerMutation = useRegisterMutation();
+
+  const form = useForm<RegisterBodyType>({
+    resolver: zodResolver(RegisterBody),
     defaultValues: {
       name: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      // confirmPassword: '',
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: RegisterBodyType) {
+    if (registerMutation.isPending) return;
+
+    try {
+      const result = await registerMutation.mutateAsync(values);
+      toast({
+        title: 'Thành công',
+        description: result.payload.message || 'Đăng ký thành công!',
+      });
+      router.push('/home');
+      router.refresh();
+    } catch (error) {
+      const errorResponse = error as { payload?: { message?: string } };
+      toast({
+        title: 'Lỗi',
+        description:
+          errorResponse?.payload?.message ||
+          'Đăng ký thất bại. Vui lòng thử lại!',
+        variant: 'destructive',
+      });
+    }
   }
 
   return (
@@ -97,7 +114,7 @@ export function SignupForm() {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form.control}
             name="confirmPassword"
             render={({ field }) => (
@@ -109,9 +126,13 @@ export function SignupForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
-          <Button className="w-full" type="submit">
-            Create account
+          /> */}
+          <Button
+            className="w-full"
+            type="submit"
+            disabled={registerMutation.isPending}
+          >
+            {registerMutation.isPending ? 'Đang đăng ký...' : 'Tạo tài khoản'}
           </Button>
         </form>
       </Form>
