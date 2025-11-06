@@ -1,2 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
+. "$(dirname "$0")/common.sh"
+
 yarn lint
