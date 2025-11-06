@@ -41,7 +41,7 @@ export default function LoginForm() {
       router.push('/manage/dashboard');
       router.refresh();
       setIsAuth(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       handleErrorApi({
         error,
         setError: form.setError,

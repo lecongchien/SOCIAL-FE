@@ -1,4 +1,5 @@
 import { cn } from '@/libs/utils';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { Message } from '../../../../types/message';
 import { User } from '../../../../types/user';
@@ -42,13 +43,12 @@ export const MessageItem: React.FC<MessageItemProps> = ({
       case 'image':
         return (
           <div className="relative">
-            <img
-              src={message.mediaUrl}
+            <Image
+              src={message.mediaUrl ?? ""}
               alt="Shared image"
               className="max-w-xs rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => {
-                /* TODO: Open image modal */
-              }}
+               width={500}
+              height={500}
             />
           </div>
         );

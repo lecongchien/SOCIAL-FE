@@ -18,19 +18,21 @@ type EntityErrorPayload = {
   }[];
 };
 
+type HttpErrorPayload = {
+  message: string;
+  [key: string]: unknown;
+};
+
 export class HttpError extends Error {
   status: number;
-  payload: {
-    message: string;
-    [key: string]: any;
-  };
+  payload: HttpErrorPayload;
   constructor({
     status,
     payload,
     message = 'Lỗi HTTP',
   }: {
     status: number;
-    payload: any;
+    payload: HttpErrorPayload;
     message?: string;
   }) {
     super(message);
@@ -55,7 +57,7 @@ export class EntityError extends HttpError {
   }
 }
 
-let clientLogoutRequest: null | Promise<any> = null;
+let clientLogoutRequest: null | Promise<Response> = null;
 const isClient = () => typeof window !== 'undefined';
 const request = async <Response>(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE',
@@ -121,11 +123,12 @@ const request = async <Response>(
             body: null,
             headers: {
               ...baseHeaders,
-            } as any,
+            },
           });
           try {
             await clientLogoutRequest;
-          } catch (error) {
+          } catch {
+            // Ignore logout errors
           } finally {
             localStorage.removeItem('accessToken');
             localStorage.removeItem('refreshToken');
@@ -138,13 +141,13 @@ const request = async <Response>(
           }
         }
       } else {
-        const accessToken = (options?.headers as any)?.Authorization.split(
-          'Bearer '
-        )[1];
+        const headers = options?.headers as Record<string, string> | undefined;
+        const authHeader = headers?.Authorization;
+        const accessToken = authHeader?.split('Bearer ')[1] || '';
         redirect(`/logout?accessToken=${accessToken}`);
       }
     } else {
-      throw new HttpError(data);
+      throw new HttpError(data as { status: number; payload: HttpErrorPayload });
     }
   }
   // Đảm bảo logic dưới đây chỉ chạy ở phía client (browser)
@@ -176,17 +179,17 @@ const http = {
   },
   post<Response>(
     url: string,
-    body: any,
+    body: unknown,
     options?: Omit<CustomOptions, 'body'> | undefined
   ) {
-    return request<Response>('POST', url, { ...options, body });
+    return request<Response>('POST', url, { ...options, body: body as BodyInit });
   },
   put<Response>(
     url: string,
-    body: any,
+    body: unknown,
     options?: Omit<CustomOptions, 'body'> | undefined
   ) {
-    return request<Response>('PUT', url, { ...options, body });
+    return request<Response>('PUT', url, { ...options, body: body as BodyInit });
   },
   delete<Response>(
     url: string,

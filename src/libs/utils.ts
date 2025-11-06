@@ -3,33 +3,39 @@ import envConfig from '@/config';
 import { DishStatus, TableStatus } from '@/constants/type';
 import { clsx, type ClassValue } from 'clsx';
 import jwt from 'jsonwebtoken';
-import { UseFormSetError } from 'react-hook-form';
+import { FieldValues, UseFormSetError } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { EntityError } from './http';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const handleErrorApi = ({
+export const handleErrorApi = <T extends FieldValues = FieldValues>({
   error,
   setError,
   duration,
 }: {
-  error: any;
-  setError?: UseFormSetError<any>;
+  error: unknown;
+  setError?: UseFormSetError<T>;
   duration?: number;
 }) => {
   if (error instanceof EntityError && setError) {
     error.payload.errors.forEach((item) => {
-      setError(item.field, {
+      setError(item.field as Parameters<UseFormSetError<T>>[0], {
         type: 'server',
         message: item.message,
       });
     });
   } else {
+    const errorMessage = 
+      error && typeof error === 'object' && 'payload' in error && 
+      error.payload && typeof error.payload === 'object' && 'message' in error.payload
+        ? String(error.payload.message)
+        : 'Lỗi không xác định';
+    
     toast({
       title: 'Lỗi',
-      description: error?.payload?.message ?? 'Lỗi không xác định',
+      description: errorMessage,
       variant: 'destructive',
       duration: duration ?? 5000,
     });
@@ -42,7 +48,7 @@ export const normalizePath = (path: string) => {
   return path.startsWith('/') ? path.slice(1) : path;
 };
 
-export const decodeJWT = <Payload = any>(token: string) => {
+export const decodeJWT = <Payload = Record<string, unknown>>(token: string) => {
   return jwt.decode(token) as Payload;
 };
 
