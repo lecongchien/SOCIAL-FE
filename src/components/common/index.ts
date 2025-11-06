@@ -1,6 +1,6 @@
 // Common Components
 export { Avatar } from './Avatar';
-export { Button } from './button';
+export { Button } from './Button';
 export { ChatWindow } from './ChatWindow';
 export { Comment } from './Comment';
 export { ConversationItem } from './ConversationItem';
@@ -16,7 +16,7 @@ export { UserCard } from './UserCard';
 
 // Types
 export type { AvatarProps } from './Avatar';
-export type { ButtonProps } from './button';
+export type { ButtonProps } from './Button';
 export type { ChatWindowProps } from './ChatWindow';
 export type { CommentProps } from './Comment';
 export type { ConversationItemProps } from './ConversationItem';
@@ -32,7 +32,7 @@ export type { UserCardProps } from './UserCard';
 
 // Export all components
 export * from './Avatar';
-export * from './button';
+export * from './Button';
 export * from './ChatWindow';
 export * from './Comment';
 export * from './ConversationItem';
@@ -47,3 +47,4 @@ export { MoreMenu } from './MoreMenu/MoreMenu';
 export * from './Post';
 export * from './Textarea';
 export * from './UserCard';
+

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React from 'react';
 
 export interface ModalProps {

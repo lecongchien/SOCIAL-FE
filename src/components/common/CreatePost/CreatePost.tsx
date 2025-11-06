@@ -2,7 +2,7 @@ import { cn } from '@/utils/cn';
 import { Image, MapPin, Smile, Video, X } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import { Avatar } from '../Avatar';
-import { Button } from '../button';
+import { Button } from '../Button';
 import { Textarea } from '../Textarea';
 
 export interface CreatePostProps {

@@ -12,10 +12,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { useRegisterMutation } from '@/queries/useAuth';
-import {
-  RegisterBody,
-  RegisterBodyType,
-} from '@/schemaValidations/auth.schema';
+import { RegisterBody, RegisterBodyType } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

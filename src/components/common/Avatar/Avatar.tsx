@@ -3,7 +3,7 @@ import {
   AvatarImage,
   Avatar as ShadcnAvatar,
 } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React from 'react';
 
 export interface AvatarProps {

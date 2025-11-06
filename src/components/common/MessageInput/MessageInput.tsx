@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React, { useRef, useState } from 'react';
-import { Button } from '../button';
+import { Button } from '../Button';
 import { Textarea } from '../Textarea';
 
 export interface MessageInputProps {

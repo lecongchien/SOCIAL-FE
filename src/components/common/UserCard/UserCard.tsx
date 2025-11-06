@@ -1,8 +1,8 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import { CheckIcon } from 'lucide-react';
 import React, { useState } from 'react';
 import { Avatar } from '../Avatar';
-import { Button } from '../button';
+import { Button } from '../Button';
 
 export interface UserCardProps {
   user: {

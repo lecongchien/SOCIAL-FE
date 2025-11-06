@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React from 'react';
 import { Conversation } from '../../../../types/message';
 import { User } from '../../../../types/user';
@@ -22,36 +22,39 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
   className,
 }) => {
   // Lấy thông tin người chat (không phải current user)
-  const otherParticipant = participants.find(p => p.id !== currentUserId);
-  
+  const otherParticipant = participants.find((p) => p.id !== currentUserId);
+
   const formatTime = (date: Date) => {
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
+
     if (days === 0) {
-      return date.toLocaleTimeString('vi-VN', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      return date.toLocaleTimeString('vi-VN', {
+        hour: '2-digit',
+        minute: '2-digit',
       });
     } else if (days === 1) {
       return 'Hôm qua';
     } else if (days < 7) {
       return `${days} ngày`;
     } else {
-      return date.toLocaleDateString('vi-VN', { 
-        day: '2-digit', 
-        month: '2-digit' 
+      return date.toLocaleDateString('vi-VN', {
+        day: '2-digit',
+        month: '2-digit',
       });
     }
   };
 
   const getLastMessagePreview = () => {
     if (!conversation.lastMessage) return 'Bắt đầu cuộc trò chuyện';
-    
+
     const { content, type, senderId } = conversation.lastMessage;
-    const senderName = senderId === currentUserId ? 'Bạn' : otherParticipant?.username || 'Unknown';
-    
+    const senderName =
+      senderId === currentUserId
+        ? 'Bạn'
+        : otherParticipant?.username || 'Unknown';
+
     switch (type) {
       case 'image':
         return `${senderName}: Đã gửi một ảnh`;
@@ -79,12 +82,22 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
       {/* Avatar */}
       <div className="relative flex-shrink-0">
         <Avatar
-          src={conversation.isGroup ? conversation.groupAvatar : otherParticipant?.avatarUrl}
-          alt={conversation.isGroup ? conversation.groupName : otherParticipant?.fullName || otherParticipant?.username}
+          src={
+            conversation.isGroup
+              ? conversation.groupAvatar
+              : otherParticipant?.avatarUrl
+          }
+          alt={
+            conversation.isGroup
+              ? conversation.groupName
+              : otherParticipant?.fullName || otherParticipant?.username
+          }
           size="md"
-          fallback={conversation.isGroup ? 
-            conversation.groupName?.charAt(0).toUpperCase() : 
-            otherParticipant?.fullName?.charAt(0).toUpperCase() || otherParticipant?.username?.charAt(0).toUpperCase()
+          fallback={
+            conversation.isGroup
+              ? conversation.groupName?.charAt(0).toUpperCase()
+              : otherParticipant?.fullName?.charAt(0).toUpperCase() ||
+                otherParticipant?.username?.charAt(0).toUpperCase()
           }
         />
         {/* Online status indicator */}
@@ -96,14 +109,17 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
       {/* Content */}
       <div className="flex-1 ml-3 min-w-0">
         <div className="flex items-center justify-between">
-          <h3 className={cn(
-            'font-medium truncate text-sm',
-            conversation.unreadCount > 0 ? 'text-gray-900' : 'text-gray-700'
-          )}>
-            {conversation.isGroup ? 
-              conversation.groupName : 
-              otherParticipant?.fullName || otherParticipant?.username || 'Unknown User'
-            }
+          <h3
+            className={cn(
+              'font-medium truncate text-sm',
+              conversation.unreadCount > 0 ? 'text-gray-900' : 'text-gray-700'
+            )}
+          >
+            {conversation.isGroup
+              ? conversation.groupName
+              : otherParticipant?.fullName ||
+                otherParticipant?.username ||
+                'Unknown User'}
           </h3>
           <div className="flex items-center gap-1">
             {conversation.lastMessage && (
@@ -113,16 +129,22 @@ export const ConversationItem: React.FC<ConversationItemProps> = ({
             )}
             {conversation.unreadCount > 0 && (
               <div className="bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-1">
-                {conversation.unreadCount > 99 ? '99+' : conversation.unreadCount}
+                {conversation.unreadCount > 99
+                  ? '99+'
+                  : conversation.unreadCount}
               </div>
             )}
           </div>
         </div>
-        
-        <p className={cn(
-          'text-sm truncate mt-0.5',
-          conversation.unreadCount > 0 ? 'text-gray-900 font-medium' : 'text-gray-500'
-        )}>
+
+        <p
+          className={cn(
+            'text-sm truncate mt-0.5',
+            conversation.unreadCount > 0
+              ? 'text-gray-900 font-medium'
+              : 'text-gray-500'
+          )}
+        >
           {getLastMessagePreview()}
         </p>
       </div>

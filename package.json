@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix",
+    "lint": "next lint",
     "lint:fix": "eslint --fix",
     "type-check": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true next build",

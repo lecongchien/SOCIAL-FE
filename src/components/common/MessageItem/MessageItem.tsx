@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React, { useState } from 'react';
 import { Message } from '../../../../types/message';
 import { User } from '../../../../types/user';

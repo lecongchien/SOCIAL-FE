@@ -51,7 +51,7 @@ Chức năng đăng ký cho phép người dùng tạo tài khoản mới trên 
 
 ### 1. Schema Validation
 
-📄 `src/schemaValidations/auth.schema.ts`
+📄 `src/schema/auth.schema.ts`
 
 - Định nghĩa `RegisterBody` và `RegisterBodyType` với Zod
 - Định nghĩa `RegisterRes` và `RegisterResType` cho response

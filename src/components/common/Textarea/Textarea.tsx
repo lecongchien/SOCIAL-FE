@@ -1,5 +1,5 @@
 import { Textarea as ShadcnTextarea } from '@/components/ui/textarea';
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React from 'react';
 
 export interface TextareaProps

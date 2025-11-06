@@ -1,9 +1,9 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/libs/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { Conversation, Message } from '../../../../types/message';
 import { User } from '../../../../types/user';
 import { Avatar } from '../Avatar';
-import { Button } from '../button';
+import { Button } from '../Button';
 import { MessageInput } from '../MessageInput';
 import { MessageItem } from '../MessageItem';
 

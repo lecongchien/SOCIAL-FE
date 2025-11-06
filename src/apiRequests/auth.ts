@@ -1,19 +1,19 @@
-import http from '@/lib/http';
+import http from '@/libs/http';
 import {
   AccountResType,
   ChangePasswordBodyType,
-} from '@/schemaValidations/account.schema';
+} from '@/schemas/account.schema';
 import {
   LoginBodyType,
   LoginResType,
   RegisterBodyType,
   RegisterResType,
-} from '@/schemaValidations/auth.schema';
-import { MessageResType } from '@/schemaValidations/common.schema';
+} from '@/schemas/auth.schema';
+import { MessageResType } from '@/schemas/common.schema';
 import {
   GuestLoginBodyType,
   GuestLoginResType,
-} from '@/schemaValidations/guest.schema';
+} from '@/schemas/guest.schema';
 
 const authApiRequest = {
   SGuestLogin: (body: GuestLoginBodyType) =>

@@ -1,16 +1,25 @@
-import http from '@/lib/http'
-import { AccountListResType, AccountResType, CreateEmployeeAccountBodyType, UpdateEmployeeAccountBodyType, UpdateMeBodyType } from '@/schemaValidations/account.schema'
-
+import http from '@/libs/http';
+import {
+  AccountListResType,
+  AccountResType,
+  CreateEmployeeAccountBodyType,
+  UpdateEmployeeAccountBodyType,
+  UpdateMeBodyType,
+} from '@/schemas/account.schema';
 
 const accountApiRequest = {
   me: () => http.get<AccountResType>('accounts/me'),
-  updateMe: (body: UpdateMeBodyType) => http.put<AccountResType>('accounts/me', body),
+  updateMe: (body: UpdateMeBodyType) =>
+    http.put<AccountResType>('accounts/me', body),
   list: () => http.get<AccountListResType>('accounts'),
-  addEmployee: (body: CreateEmployeeAccountBodyType) => http.post<AccountResType>('accounts', body),
+  addEmployee: (body: CreateEmployeeAccountBodyType) =>
+    http.post<AccountResType>('accounts', body),
   updateEmployee: (id: number, body: UpdateEmployeeAccountBodyType) =>
     http.put<AccountResType>(`accounts/detail/${id}`, body),
-  deleteEmployee: (id: number) => http.delete<AccountResType>(`accounts/detail/${id}`),
-  getEmployee: (id: number) => http.get<AccountResType>(`accounts/detail/${id}`)
-}
+  deleteEmployee: (id: number) =>
+    http.delete<AccountResType>(`accounts/detail/${id}`),
+  getEmployee: (id: number) =>
+    http.get<AccountResType>(`accounts/detail/${id}`),
+};
 
-export default accountApiRequest
+export default accountApiRequest;
