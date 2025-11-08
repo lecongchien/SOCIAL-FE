@@ -7,14 +7,14 @@ import React from 'react';
 import { MoreMenu } from '../common';
 import { Avatar } from '../common/Avatar';
 import {
-  CreateIcon,
-  ExploreIcon,
-  HomeIcon,
-  MessagesIcon,
-  NotificationsIcon,
-  ProfileIcon,
-  ReelsIcon,
-  SearchIcon,
+    CreateIcon,
+    ExploreIcon,
+    HomeIcon,
+    MessagesIcon,
+    NotificationsIcon,
+    ProfileIcon,
+    ReelsIcon,
+    SearchIcon,
 } from '../common/icons';
 
 interface NavigationItem {
@@ -94,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed = false }) => {
         <Link href="/home" className="p-6 border-b border-gray-200">
           <div className="flex items-center">
             {!isCollapsed ? (
-              <h1 className="text-2xl font-bold text-black">Instagram</h1>
+              <h1 className="text-2xl font-bold text-black">Viora</h1>
             ) : (
               <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">I</span>

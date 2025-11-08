@@ -25,7 +25,7 @@ export const TopNav: React.FC = () => {
           <div className="flex items-center gap-2">
             <Link href="/" aria-label="Home" className="flex items-center">
               <span className="font-cursive text-white text-2xl font-semibold select-none">
-                Instagram
+                Viora
               </span>
               <svg
                 className="w-4 h-4 ml-1 text-gray-700 dark:text-zinc-300"
