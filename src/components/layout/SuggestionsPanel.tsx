@@ -146,7 +146,7 @@ export const SuggestionsPanel: React.FC = () => {
             </div>
           </div>
           <div className="text-xs text-gray-400">
-            © 2023 INSTAGRAM FROM META
+            © 2023 Viora FROM META
           </div>
         </div>
       </div>

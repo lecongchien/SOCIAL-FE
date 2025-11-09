@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     'A modern social media platform to connect with friends and share moments.',
   keywords: [
     'social media',
-    'instagram clone',
+    'Viora clone',
     'photo sharing',
     'social network',
   ],
