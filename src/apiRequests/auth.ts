@@ -57,10 +57,12 @@ const authApiRequest = {
     http.put<AccountResType>('/account/change-password', body),
   SRegister: (body: RegisterBodyType) =>
     http.post<RegisterResType>('/auth/register', body),
+  // register: (body: RegisterBodyType) =>
+  //   http.post<RegisterResType>('/api/auth/register', body, {
+  //     baseUrl: 'http://localhost:5001',
+  //   }),
   register: (body: RegisterBodyType) =>
-    http.post<RegisterResType>('/api/auth/register', body, {
-      baseUrl: 'http://localhost:5001',
-    }),
+    http.post<RegisterResType>('/api/auth/register', body),
 };
 
 export default authApiRequest;
